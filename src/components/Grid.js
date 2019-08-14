@@ -1,16 +1,37 @@
-import React from "react";
+import React, { Component } from "react";
 import Row from "./Row";
+import SneakerForm from "./SneakerForm";
 
-function Grid() {
-  return (
-    <div className="grid">
-      <Row />
-      <Row />
-      <Row />
-      <Row />
-      <Row />
-    </div>
-  );
+class Grid extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showForm: false
+    };
+    this.displayForm = this.displayForm.bind(this);
+  }
+
+  displayForm() {
+    this.setState(state => ({
+      showForm: !state.showForm
+    }));
+    // console.log(this.state.showForm);
+  }
+
+  render() {
+    return (
+      <div className="grid">
+        <div>
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+        </div>
+        {/* <SneakerForm /> */}
+      </div>
+    );
+  }
 }
 
 export default Grid;
