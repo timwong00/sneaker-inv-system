@@ -71,7 +71,7 @@ class Box extends Component {
 
   handleDeleteSneaker(event) {
     event.preventDefault();
-    const deleteConfirm = window.confirm("Press OK to delete this item.");
+    const deleteConfirm = window.confirm("Press OK to delete this sneaker.");
     if (deleteConfirm) {
       this.setState(this.baseState);
     }

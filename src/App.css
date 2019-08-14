@@ -31,8 +31,6 @@ body,
 .boxContainer {
   border: 1px solid black;
   cursor: pointer;
-  /* border-left: 1px solid black;
-  border-right: 1px solid black; */
   width: 20%;
   margin: 10px;
   font-size: 12px;
@@ -58,14 +56,103 @@ body,
   margin: 10px;
 }
 
+.sneakerFormContainer {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  background-color: white;
+  z-index: 100;
+}
+
 .sneakerForm {
+  cursor: auto;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid black;
+  background-color: black;
+  padding: 20px;
+  width: 300px;
+  height: 400px;
+}
+
+.sneakerFormTitle {
+  margin: 0 0 20px 0;
+  padding-bottom: 5px;
+  font-size: 28px;
+  border-bottom: 5px solid white;
+}
+
+.sneakerFormLabel {
+  text-align: center;
+  font-size: 16px;
+}
+
+.sneakerForm p {
+  width: 100%;
+}
+
+.sneakerForm p input {
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.formInputContainer,
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  border: none;
+  margin-top: 15px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(122, 191, 247);
+}
+
+.closeButton {
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.backButton {
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.closeButton:hover,
+.backButton:hover {
+  cursor: pointer;
+  color: rgb(122, 191, 247);
+}
+
+.buttonContainer {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid black;
-  background-color: rgb(100, 100, 100);
+  width: 100px;
+}
+
+.deleteButton:hover {
+  background-color: red;
 }

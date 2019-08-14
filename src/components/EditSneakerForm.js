@@ -42,7 +42,10 @@ class EditSneakerForm extends Component {
 
   handleEditSneaker(event) {
     event.preventDefault();
-    this.openEditForm();
+    this.setState({
+      editingSneaker: !this.state.editingSneaker
+    });
+    // this.toggleEditForm();
     // this.checkForData(this.state.sneakerData);
     // console.log(this.checkForData(this.state.sneakerData));
   }
@@ -61,11 +64,11 @@ class EditSneakerForm extends Component {
     }
   }
 
-  openEditForm() {
-    this.setState({
-      editingSneaker: !this.state.editingSneaker
-    });
-  }
+  // toggleEditForm() {
+  //   this.setState({
+  //     editingSneaker: !this.state.editingSneaker
+  //   });
+  // }
 
   componentDidMount() {
     this.setState({
@@ -81,14 +84,14 @@ class EditSneakerForm extends Component {
   render() {
     const { brand, style, size, upcID } = this.props;
     return (
-      <div className="sneakerForm-background">
+      <div className="sneakerFormContainer">
         <form className="sneakerForm" onSubmit={this.handleFormSubmit}>
-          <button onClick={this.handleCloseForm}>X</button>
-          <button onClick={this.handleEditSneaker}>Edit Sneaker</button>
-          <button onClick={this.handleDeleteSneaker}>Delete Sneaker</button>
-
           {this.state.editingSneaker && (
-            <div>
+            <div className="formInputContainer">
+              <span onClick={this.handleEditSneaker} className="backButton">
+                &#8592;
+              </span>
+              <h3 className="sneakerFormTitle">Edit Sneaker</h3>
               <SneakerInputBlock
                 onChange={this.handleChange}
                 inputBrand="brand"
@@ -100,9 +103,24 @@ class EditSneakerForm extends Component {
                 sizeValue={size}
                 upcIDValue={upcID}
               />
-              <button>Submit</button>
-              {/* <button onClick={this.handleClearForm}>Clear</button> */}
+              <button className="submitButton">Submit</button>
             </div>
+          )}
+          <span onClick={this.handleCloseForm} className="closeButton">
+            X
+          </span>
+          {!this.state.editingSneaker ? (
+            <div className="buttonContainer">
+              <button onClick={this.handleEditSneaker}>Edit Sneaker</button>
+              <button
+                onClick={this.handleDeleteSneaker}
+                className="deleteButton"
+              >
+                Delete Sneaker
+              </button>
+            </div>
+          ) : (
+            ""
           )}
         </form>
       </div>

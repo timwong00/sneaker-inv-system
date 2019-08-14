@@ -46,10 +46,10 @@ class AddSneakerForm extends Component {
 
   render() {
     return (
-      <div className="sneakerForm-background">
+      <div className="sneakerFormContainer">
         <form className="sneakerForm" onSubmit={this.handleFormSubmit}>
-          <h3>Add a sneaker</h3>
-          <div>
+          <h3 className="sneakerFormTitle">Add Sneaker</h3>
+          <div className="formInputContainer">
             <SneakerInputBlock
               onChange={this.handleChange}
               inputBrand="brand"
@@ -57,9 +57,11 @@ class AddSneakerForm extends Component {
               inputSize="size"
               inputUpcID="upcID"
             />
-            <button>Submit</button>
+            <button className="submitButton">Submit</button>
+            <span onClick={this.handleCloseForm} className="closeButton">
+              X
+            </span>
           </div>
-          <button onClick={this.handleCloseForm}>Close</button>
         </form>
       </div>
     );

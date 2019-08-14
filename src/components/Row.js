@@ -7,9 +7,9 @@ class Row extends Component {
       <div className="row">
         <Box />
         <Box />
-        {/* <Box />
         <Box />
-        <Box /> */}
+        <Box />
+        <Box />
       </div>
     );
   }

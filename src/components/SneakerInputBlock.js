@@ -34,8 +34,8 @@ class SneakerInputBlock extends Component {
 
   render() {
     return (
-      <div>
-        <label>Brand</label>
+      <div className="inputBlock">
+        <label className="sneakerFormLabel">Brand</label>
         <TextInput
           inputRef={this.setTextInputRef}
           type="text"
@@ -43,21 +43,21 @@ class SneakerInputBlock extends Component {
           onChange={this.handleChange}
           value={this.props.brandValue}
         />
-        <label>Style</label>
+        <label className="sneakerFormLabel">Style</label>
         <TextInput
           type="text"
           name={this.props.inputStyle}
           onChange={this.handleChange}
           value={this.props.styleValue}
         />
-        <label>Size</label>
+        <label className="sneakerFormLabel">Size</label>
         <TextInput
           type="text"
           name={this.props.inputSize}
           onChange={this.handleChange}
           value={this.props.sizeValue}
         />
-        <label>UPC ID</label>
+        <label className="sneakerFormLabel">UPC ID</label>
         <TextInput
           type="text"
           name={this.props.inputUpcID}

@@ -14,9 +14,9 @@ class Grid extends Component {
       <div className="grid">
         <Row />
         <Row />
-        {/* <Row />
         <Row />
-        <Row /> */}
+        <Row />
+        <Row />
       </div>
     );
   }
