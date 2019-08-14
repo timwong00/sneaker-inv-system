@@ -23,10 +23,10 @@ class Grid extends Component {
       <div className="grid">
         <div>
           <Row />
+          {/* <Row />
           <Row />
           <Row />
-          <Row />
-          <Row />
+          <Row /> */}
         </div>
         {/* <SneakerForm /> */}
       </div>

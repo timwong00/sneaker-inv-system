@@ -5,38 +5,29 @@ class SneakerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sneakerData: {
-        brand: "",
-        style: "",
-        size: "",
-        upcID: ""
-      }
+      isHidden: true
     };
 
-    // // reference
-    // this.inputBrandRef = React.createRef();
-    // this.inputStyleRef = React.createRef();
-
-    this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
+    // this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleAddSneaker = this.handleAddSneaker.bind(this);
+    this.handleEditSneaker = this.handleEditSneaker.bind(this);
+    this.handleCloseForm = this.handleCloseForm.bind(this);
+    this.handleDeleteSneaker = this.handleDeleteSneaker.bind(this);
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
-    const data = this.state.sneakerData;
-    if (this.props.onSubmit) {
-      this.props.onSubmit(data);
-    }
-  }
-
-  handleInputChange(event) {
-    event.preventDefault();
-    const { name, value } = event.target;
-    this.setState(prevState => ({
-      [name]: value
-    }));
-  }
+  // handleInputChange(event) {
+  //   event.preventDefault();
+  //   const { name, value } = event.target;
+  //   this.setState(prevState => ({
+  //     sneakerData: {
+  //       ...prevState.sneakerData,
+  //       [name]: value
+  //     }
+  //   }));
+  // }
 
   handleChange(event) {
     event.preventDefault();
@@ -45,50 +36,97 @@ class SneakerForm extends Component {
     }
   }
 
-  // clears form data
-  handleClearForm(event) {
+  handleFormSubmit(event) {
     event.preventDefault();
+    if (this.props.onSubmit) {
+      this.props.onSubmit(event);
+    }
+  }
+
+  // handleClearForm(event) {
+  //   event.preventDefault();
+  //   this.setState({
+  //     sneakerData: {
+  //       brand: "",
+  //       style: "",
+  //       size: "",
+  //       upcID: ""
+  //     }
+  //   });
+  // }
+
+  handleAddSneaker(event) {
+    event.preventDefault();
+    this.toggleHidden();
+    if (this.props.handleAddSneaker) {
+      this.props.handleAddSneaker(event);
+    }
+  }
+
+  handleEditSneaker(event) {
+    event.preventDefault();
+    this.toggleHidden();
+    // this.checkForData(this.state.sneakerData);
+    // console.log(this.checkForData(this.state.sneakerData));
+  }
+
+  handleDeleteSneaker(event) {
+    event.preventDefault();
+    if (this.props.handleDeleteSneaker) {
+      this.props.handleDeleteSneaker(event);
+    }
+  }
+
+  handleCloseForm(event) {
+    event.preventDefault();
+    if (this.props.handleCloseForm) {
+      this.props.handleCloseForm(event);
+    }
+  }
+
+  toggleHidden() {
     this.setState({
-      sneakerData: {
-        brand: "",
-        style: "",
-        size: "",
-        upcID: ""
-      }
+      isHidden: !this.state.isHidden
     });
   }
 
   componentDidMount() {
     this.setState({
       sneakerData: {
-        brand: "Adidas",
-        style: "Yeezy",
-        size: "10",
-        upcID: "ABC123"
+        brand: this.props.brand,
+        style: this.props.style,
+        size: this.props.size,
+        upcID: this.props.upcID
       }
     });
   }
 
   render() {
+    const { brand, style, size, upcID } = this.props;
     return (
       <form className="sneakerForm" onSubmit={this.handleFormSubmit}>
-        {/* <p>Brand: {this.state.brand}</p>
-        <p>Style: {this.state.style}</p>
-        <p>Size: {this.state.size}</p>
-        <p>UPC ID: {this.state.upcID}</p> */}
-        <SneakerInputBlock
-          onChange={this.handleInputChange}
-          inputBrand="brand"
-          inputStyle="style"
-          inputSize="size"
-          inputUpcID="upcID"
-          brandValue={this.state.sneakerData.brand}
-          styleValue={this.state.sneakerData.style}
-          sizeValue={this.state.sneakerData.size}
-          upcIDValue={this.state.sneakerData.upcID}
-        />
-        <button>Submit</button>
-        <button onClick={this.handleClearForm}>Clear</button>
+        <button onClick={this.handleCloseForm}>X</button>
+        <button onClick={this.handleAddSneaker}>Add</button>
+        <button onClick={this.handleEditSneaker}>Edit</button>
+        <button onClick={this.handleDeleteSneaker}>Delete</button>
+
+        {!this.state.isHidden && (
+          <div>
+            <SneakerInputBlock
+              onChange={this.handleChange}
+              inputBrand="brand"
+              inputStyle="style"
+              inputSize="size"
+              inputUpcID="upcID"
+              brandValue={brand}
+              styleValue={style}
+              sizeValue={size}
+              upcIDValue={upcID}
+            />
+            <button>Submit</button>
+            {/* <button onClick={this.handleClearForm}>Clear</button> */}
+          </div>
+        )}
       </form>
     );
   }

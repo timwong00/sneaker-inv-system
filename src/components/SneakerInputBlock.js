@@ -5,10 +5,12 @@ class SneakerInputBlock extends Component {
   constructor(props) {
     super(props);
     this.textInput = null;
+
     // set text input reference to input element
     this.setTextInputRef = el => {
       this.textInput = el;
     };
+
     // focus on text input
     this.focusTextInput = () => {
       if (this.textInput) {
