@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import SneakerInputBlock from "./SneakerInputBlock";
 
-class SneakerForm extends Component {
+class EditSneakerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHidden: true
+      editingSneaker: false
     };
 
-    // this.handleInputChange = this.handleInputChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    // this.handleClearForm = this.handleClearForm.bind(this);
-    this.handleAddSneaker = this.handleAddSneaker.bind(this);
     this.handleEditSneaker = this.handleEditSneaker.bind(this);
     this.handleCloseForm = this.handleCloseForm.bind(this);
     this.handleDeleteSneaker = this.handleDeleteSneaker.bind(this);
@@ -43,29 +40,9 @@ class SneakerForm extends Component {
     }
   }
 
-  // handleClearForm(event) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     sneakerData: {
-  //       brand: "",
-  //       style: "",
-  //       size: "",
-  //       upcID: ""
-  //     }
-  //   });
-  // }
-
-  handleAddSneaker(event) {
-    event.preventDefault();
-    this.toggleHidden();
-    if (this.props.handleAddSneaker) {
-      this.props.handleAddSneaker(event);
-    }
-  }
-
   handleEditSneaker(event) {
     event.preventDefault();
-    this.toggleHidden();
+    this.openEditForm();
     // this.checkForData(this.state.sneakerData);
     // console.log(this.checkForData(this.state.sneakerData));
   }
@@ -84,9 +61,9 @@ class SneakerForm extends Component {
     }
   }
 
-  toggleHidden() {
+  openEditForm() {
     this.setState({
-      isHidden: !this.state.isHidden
+      editingSneaker: !this.state.editingSneaker
     });
   }
 
@@ -104,32 +81,33 @@ class SneakerForm extends Component {
   render() {
     const { brand, style, size, upcID } = this.props;
     return (
-      <form className="sneakerForm" onSubmit={this.handleFormSubmit}>
-        <button onClick={this.handleCloseForm}>X</button>
-        <button onClick={this.handleAddSneaker}>Add</button>
-        <button onClick={this.handleEditSneaker}>Edit</button>
-        <button onClick={this.handleDeleteSneaker}>Delete</button>
+      <div className="sneakerForm-background">
+        <form className="sneakerForm" onSubmit={this.handleFormSubmit}>
+          <button onClick={this.handleCloseForm}>X</button>
+          <button onClick={this.handleEditSneaker}>Edit Sneaker</button>
+          <button onClick={this.handleDeleteSneaker}>Delete Sneaker</button>
 
-        {!this.state.isHidden && (
-          <div>
-            <SneakerInputBlock
-              onChange={this.handleChange}
-              inputBrand="brand"
-              inputStyle="style"
-              inputSize="size"
-              inputUpcID="upcID"
-              brandValue={brand}
-              styleValue={style}
-              sizeValue={size}
-              upcIDValue={upcID}
-            />
-            <button>Submit</button>
-            {/* <button onClick={this.handleClearForm}>Clear</button> */}
-          </div>
-        )}
-      </form>
+          {this.state.editingSneaker && (
+            <div>
+              <SneakerInputBlock
+                onChange={this.handleChange}
+                inputBrand="brand"
+                inputStyle="style"
+                inputSize="size"
+                inputUpcID="upcID"
+                brandValue={brand}
+                styleValue={style}
+                sizeValue={size}
+                upcIDValue={upcID}
+              />
+              <button>Submit</button>
+              {/* <button onClick={this.handleClearForm}>Clear</button> */}
+            </div>
+          )}
+        </form>
+      </div>
     );
   }
 }
 
-export default SneakerForm;
+export default EditSneakerForm;

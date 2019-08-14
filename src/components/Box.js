@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SneakerForm from "./SneakerForm";
+import EditSneakerForm from "./EditSneakerForm";
+import AddSneakerForm from "./AddSneakerForm";
 
 class Box extends Component {
   constructor(props) {
@@ -12,10 +13,15 @@ class Box extends Component {
         size: "",
         upcID: ""
       },
-      isFormShowing: false
+      showAddForm: false,
+      showEditForm: false,
+      hasSneakerData: false
     };
 
-    this.displayForm = this.displayForm.bind(this);
+    this.baseState = this.state;
+
+    this.displayAddForm = this.displayAddForm.bind(this);
+    this.displayEditForm = this.displayEditForm.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleCloseForm = this.handleCloseForm.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -27,7 +33,11 @@ class Box extends Component {
     event.preventDefault();
     const data = this.state.sneakerData;
     console.log(data);
-    this.setState({ isFormShowing: false });
+    this.setState({
+      showAddForm: false,
+      showEditForm: false,
+      hasSneakerData: true
+    });
   }
 
   handleInputChange(event) {
@@ -43,20 +53,19 @@ class Box extends Component {
 
   handleAddSneaker(event) {
     event.preventDefault();
-    const emptyData = checkEmptyData(this.state.sneakerData);
-    console.log(emptyData);
-    if (emptyData) {
-      console.log("no data");
-    }
+    // const emptyData = checkEmptyData(this.state.sneakerData);
+    // // console.log(emptyData);
+    // if (emptyData) {
+    //   // console.log("no data");
+    // }
+  }
 
-    function checkEmptyData(sneakerData) {
-      for (let key in sneakerData) {
-        console.log(key);
-        if (sneakerData[key] === "") {
-          return true;
-        }
-        return false;
+  checkDataExist(sneakerData) {
+    for (let key in sneakerData) {
+      if (sneakerData[key] !== "") {
+        return true;
       }
+      return false;
     }
   }
 
@@ -64,44 +73,60 @@ class Box extends Component {
     event.preventDefault();
     const deleteConfirm = window.confirm("Press OK to delete this item.");
     if (deleteConfirm) {
-      this.setState({
-        sneakerData: {
-          brand: "",
-          style: "",
-          size: "",
-          upcID: ""
-        },
-        isFormShowing: false
-      });
+      this.setState(this.baseState);
     }
   }
 
   handleCloseForm() {
     this.setState({
-      isFormShowing: false
+      showAddForm: false,
+      showEditForm: false
     });
   }
 
-  displayForm() {
+  displayAddForm() {
     this.setState({
-      isFormShowing: !this.state.isFormShowing
+      showAddForm: !this.state.showAddForm
+    });
+  }
+
+  displayEditForm() {
+    this.setState({
+      showEditForm: !this.state.showEditForm
     });
   }
 
   render() {
     const { brand, style, size, upcID } = this.state.sneakerData;
     return (
-      <div className="box">
-        {
-          <div onClick={this.displayForm}>
-            <p>Brand: {brand}</p>
-            <p>Style: {style}</p>
-            <p>Size: {size}</p>
-            <p>UPC ID: {upcID}</p>
-          </div>
-        }
-        {this.state.isFormShowing && (
-          <SneakerForm
+      <div className="boxContainer">
+        <div className="contentContainer">
+          {this.state.hasSneakerData ? (
+            <div className="content" onClick={this.displayEditForm}>
+              <p className="sneakerInfo">Brand: {brand}</p>
+              <p className="sneakerInfo">Style: {style}</p>
+              <p className="sneakerInfo">Size: {size}</p>
+              <p className="sneakerInfo">UPC ID: {upcID}</p>
+            </div>
+          ) : (
+            <div className="content" onClick={this.displayAddForm}>
+              <p className="addSneakerButton">Add a sneaker</p>
+            </div>
+          )}
+        </div>
+
+        {this.state.showAddForm && (
+          <AddSneakerForm
+            onChange={this.handleInputChange}
+            onSubmit={this.handleFormSubmit}
+            handleAddSneaker={this.handleAddSneaker}
+            handleCloseForm={this.handleCloseForm}
+            handleDeleteSneaker={this.handleDeleteSneaker}
+          />
+        )}
+
+        {this.state.showEditForm && (
+          <EditSneakerForm
             onChange={this.handleInputChange}
             onSubmit={this.handleFormSubmit}
             handleAddSneaker={this.handleAddSneaker}
