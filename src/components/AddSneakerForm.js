@@ -16,31 +16,31 @@ class AddSneakerForm extends Component {
     this.handleCloseForm = this.handleCloseForm.bind(this);
   }
 
-  handleChange(event) {
-    event.preventDefault();
+  handleChange(e) {
+    e.preventDefault();
     if (this.props.onChange) {
-      this.props.onChange(event);
+      this.props.onChange(e);
     }
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
+  handleFormSubmit(e) {
+    e.preventDefault();
     if (this.props.onSubmit) {
-      this.props.onSubmit(event);
+      this.props.onSubmit(e);
     }
   }
 
-  handleAddSneaker(event) {
-    event.preventDefault();
+  handleAddSneaker(e) {
+    e.preventDefault();
     if (this.props.handleAddSneaker) {
-      this.props.handleAddSneaker(event);
+      this.props.handleAddSneaker(e);
     }
   }
 
-  handleCloseForm(event) {
-    event.preventDefault();
+  handleCloseForm(e) {
+    e.preventDefault();
     if (this.props.handleCloseForm) {
-      this.props.handleCloseForm(event);
+      this.props.handleCloseForm(e);
     }
   }
 

@@ -15,70 +15,39 @@ class EditSneakerForm extends Component {
     this.handleDeleteSneaker = this.handleDeleteSneaker.bind(this);
   }
 
-  // handleInputChange(event) {
-  //   event.preventDefault();
-  //   const { name, value } = event.target;
-  //   this.setState(prevState => ({
-  //     sneakerData: {
-  //       ...prevState.sneakerData,
-  //       [name]: value
-  //     }
-  //   }));
-  // }
-
-  handleChange(event) {
-    event.preventDefault();
+  handleChange(e) {
+    e.preventDefault();
     if (this.props.onChange) {
-      this.props.onChange(event);
+      this.props.onChange(e);
     }
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
+  handleFormSubmit(e) {
+    e.preventDefault();
     if (this.props.onSubmit) {
-      this.props.onSubmit(event);
+      this.props.onSubmit(e);
     }
   }
 
-  handleEditSneaker(event) {
-    event.preventDefault();
+  handleEditSneaker(e) {
+    e.preventDefault();
     this.setState({
       editingSneaker: !this.state.editingSneaker
     });
-    // this.toggleEditForm();
-    // this.checkForData(this.state.sneakerData);
-    // console.log(this.checkForData(this.state.sneakerData));
   }
 
-  handleDeleteSneaker(event) {
-    event.preventDefault();
+  handleDeleteSneaker(e) {
+    e.preventDefault();
     if (this.props.handleDeleteSneaker) {
-      this.props.handleDeleteSneaker(event);
+      this.props.handleDeleteSneaker(e);
     }
   }
 
-  handleCloseForm(event) {
-    event.preventDefault();
+  handleCloseForm(e) {
+    e.preventDefault();
     if (this.props.handleCloseForm) {
-      this.props.handleCloseForm(event);
+      this.props.handleCloseForm(e);
     }
-  }
-
-  // toggleEditForm() {
-  //   this.setState({
-  //     editingSneaker: !this.state.editingSneaker
-  //   });
-  // }
-
-  componentDidMount() {
-    this.setState({
-      sneakerData: {
-        brand: this.props.brand,
-        style: this.props.style,
-        size: this.props.size,
-        upcID: this.props.upcID
-      }
-    });
   }
 
   render() {
@@ -106,9 +75,11 @@ class EditSneakerForm extends Component {
               <button className="submitButton">Submit</button>
             </div>
           )}
+
           <span onClick={this.handleCloseForm} className="closeButton">
             X
           </span>
+
           {!this.state.editingSneaker ? (
             <div className="buttonContainer">
               <button onClick={this.handleEditSneaker}>Edit Sneaker</button>

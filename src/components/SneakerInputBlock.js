@@ -4,32 +4,15 @@ import TextInput from "./TextInput";
 class SneakerInputBlock extends Component {
   constructor(props) {
     super(props);
-    this.textInput = null;
-
-    // set text input reference to input element
-    this.setTextInputRef = el => {
-      this.textInput = el;
-    };
-
-    // focus on text input
-    this.focusTextInput = () => {
-      if (this.textInput) {
-        this.textInput.focus();
-      }
-    };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    event.preventDefault();
+  handleChange(e) {
+    e.preventDefault();
     if (this.props.onChange) {
-      this.props.onChange(event);
+      this.props.onChange(e);
     }
-  }
-
-  componentDidMount() {
-    this.focusTextInput();
   }
 
   render() {
@@ -37,7 +20,6 @@ class SneakerInputBlock extends Component {
       <div className="inputBlock">
         <label className="sneakerFormLabel">Brand</label>
         <TextInput
-          inputRef={this.setTextInputRef}
           type="text"
           name={this.props.inputBrand}
           onChange={this.handleChange}

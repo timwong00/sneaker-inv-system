@@ -1,24 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
 
-function TextInput(props) {
-  function handleChange(event) {
-    event.preventDefault();
-    if (props.onChange) {
-      props.onChange(event);
+class TextInput extends Component {
+  constructor() {
+    super();
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    if (this.props.onChange) {
+      this.props.onChange(e);
     }
   }
 
-  return (
-    <p>
-      <input
-        ref={props.inputRef}
-        type="text"
-        value={props.value}
-        name={props.name}
-        onChange={handleChange}
-      />
-    </p>
-  );
+  render() {
+    return (
+      <p>
+        <input
+          type="text"
+          value={this.props.value}
+          name={this.props.name}
+          onChange={this.handleChange}
+        />
+      </p>
+    );
+  }
 }
 
 export default TextInput;
